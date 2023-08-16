@@ -11,6 +11,13 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
+      httpOptions: {
+        timeout: 10000,
+      },
+      secret: process.env.JWT_SECRET,
+      session: {
+        strategy: "jwt",
+      },
     }),
   ],
   async session({ session }) {
@@ -24,6 +31,7 @@ const handler = NextAuth({
   },
   async signIn({ profile }) {
     try {
+      console.log(profile);
       await connectToDB();
       //check if a user is already existing
       const userExists = await User.findOne({ email: profile.email });
