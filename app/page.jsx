@@ -1,23 +1,8 @@
 "use client";
-import { connectToDB } from "@utils/database";
+
+import Feed from "@components/Feed";
 
 const Home = () => {
-  const add_user = async () => {
-    try {
-      await connectToDB();
-
-      await User.create({
-        email: "admin@example.com",
-        username: "user",
-        image: "profile.picture.jpg",
-      });
-
-      return true;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
-  };
   return (
     <section className="w-full flex-center flex-col">
       <h1 className="head_text text-center ">
@@ -29,7 +14,8 @@ const Home = () => {
         Promptopia is an open-source AI prompting tool for modern world to
         discover, create and share creative prompts
       </p>
-      <button onClick={add_user}>click</button>
+
+      <Feed />
     </section>
   );
 };
