@@ -20,10 +20,8 @@ const MyProfile = () => {
           method: "DELETE",
         });
 
-        const filteredPosts = posts.filter((p) => {
-          p._id !== post._id;
-          setPosts(filteredPosts);
-        });
+        const filteredPosts = posts.filter((item) => item._id !== post._id);
+        setPosts(filteredPosts);
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +35,7 @@ const MyProfile = () => {
       setPosts(data);
     };
     if (session?.user.id) fetchPosts();
-  }, []);
+  }, [session?.user.id]);
 
   return (
     <Profile
